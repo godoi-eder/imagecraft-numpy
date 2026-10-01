@@ -1,12 +1,12 @@
 import argparse
 import os 
-from imagecraft.core import (
+from Imagecraft.core import (
     to_grayscale,
     invert_colors,
     adjust_brightness,
     apply_blur
 )
-from imagecraft.utils import load_image_as_array, save_array_as_image
+from Imagecraft.utils import load_image_as_array, save_array_as_image
 
 def main():
     parser = argparse.ArgumentParser(description = 'ImageCraft-NumPy: Processamento de Imagem via CLI com NumPy.')
@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
     
     # Garante que o diretório de saída exista
-    output_dir = os.path.driname(args.output_path)
+    output_dir = os.path.dirname(args.output_path)
     if output_dir:
         os.makedirs(output_dir, exist_ok = True)
         
@@ -37,6 +37,8 @@ def main():
         if args.invert:
             processed_array = invert_colors(processed_array)
         if args.brightness is not None:
+            processed_array = adjust_brightness(processed_array, args.brightness)
+        if args.blur is not None:
             processed_array = apply_blur(processed_array, args.blur)
             
         # Salva a imagem processada

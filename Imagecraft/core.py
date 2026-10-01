@@ -39,22 +39,20 @@ def apply_blur(image_array: np.ndarray, strength: int = 1) -> np.ndarray:
     '''
     if strength < 1:
         return image_array
-    
+
     kernel_size = strength * 2 + 1
-    
-    # Cria uma cópia com preenchimento (padding) para lidar com as bordas
-    padded_array = np.pad(image_array, ((strength, strength), (strength, strength), (0, 0)), 'edge')
-    blurred_array = np.zeros_like(image_array)
-    
-    # Simulação da convolução somando janelas deslocadas
-    # Esta é uma forma mais "Numpy-like" do que usar loops for aninhados
-    temp_array = np.zeros_like(padded_array, dtype = np.float32)
-    
-    for i in range(kernel_size):
-        for j in range(kernel_size):
-            temp_array[strength: -strength, strength: -strength] += padded_array[i:i-kernel_size + 1 or None, j:j-kernel_size + 1 or None]
-            
-        blurred_array = (temp_array[strength: -strength, strength: -strength] / (kernel_size ** 2)).astype(np.uint8)
-        
-        return blurred_array
+    padding = ((strength, strength), (strength, strength)) + ((0, 0),) * (image_array.ndim - 2)
+    padded_array = np.pad(image_array, padding, mode='edge')
+    blurred_array = np.zeros(image_array.shape, dtype=np.float32)
+
+    # Soma cada janela do kernel para imagens em escala de cinza ou coloridas.
+    height, width = image_array.shape[:2]
+    for row in range(kernel_size):
+        for column in range(kernel_size):
+            blurred_array += padded_array[
+                row:row + height,
+                column:column + width,
+            ]
+
+    return (blurred_array / (kernel_size ** 2)).astype(np.uint8)
     
