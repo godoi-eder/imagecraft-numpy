@@ -13,14 +13,14 @@ Este projeto serve como um exemplo prático de como imagens podem ser tratadas c
 
 ## **Instalação**
 
-1. **Cloen o repositório:**
+**1. Cloen o repositório:**
 
 ```bash
 git clone https://github.com/godoi-eder/imagecraft-numpy.git
 cd imagecraft-numpy
 ```
 
-2. **Crie e ative um ambiente virtual:**
+**2. Crie e ative um ambiente virtual:**
 
 ```bash
 # Crie o ambiente
@@ -34,7 +34,7 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-3. \*\*Instale as dependências:
+**3. Instale as dependências:**
 
 ```bash
 pip install -r requirements.txt
@@ -48,31 +48,31 @@ A ferramenta é executada via linha de comando. O formato básico é: `python ma
 
 Suponha que você tenha uma imagem chamada `input.jpg` na pasta `exemples/`.
 
-1. **Converter para escala de cinza:**
+**1. Converter para escala de cinza:**
 
 ```bash
 python main.py exemple/input.jpg examples/output/grayscale.png --grayscale
 ```
 
-2. **Inverter as cores:**
+**2. Inverter as cores:**
 
 ```bash
 python main.py examples/input.jpg examples/output/inverted.png --invert
 ```
 
-3. **Aumentar o brilho em 50 pontos:**
+**3. Aumentar o brilho em 50 pontos:**
 
 ```bash
 python main.py examples/input.jpg examples/output/bright.png --brightness 50
 ```
 
-4. **Aplicar um blur de força 5:**
+**4. Aplicar um blur de força 5:**
 
 ```bash
 python main.py examples/input.jpg examples/output/blurred.png --blur 5
 ```
 
-5. **Combinar operações (blur e depois inversão):**
+**5. Combinar operações (blur e depois inversão):**
 
 ```bash
 python main.py example/input.jpg examples/output/blurred_iverted.png ==blur 3 --invert
